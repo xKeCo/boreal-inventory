@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import {
@@ -9,9 +11,10 @@ import {
 
 export default function SimpleBottomNavigation() {
   const [value, setValue] = useState(0);
+  const router = useRouter();
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const onLink = (href) => {
+    router.push(href);
   };
 
   return (
@@ -19,11 +22,41 @@ export default function SimpleBottomNavigation() {
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0, width: "100%" }}
       value={value}
       showLabels
-      onChange={handleChange}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
     >
-      <BottomNavigationAction label="Inicio" icon={<HomeIcon />} />
-      <BottomNavigationAction label="Inventario" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Perfil" icon={<PersonIcon />} />
+      <Link href="/" passHref>
+        <BottomNavigationAction
+          label="Inicio"
+          // onClick={() => {
+          //   onLink("/");
+          // }}
+          showLabel
+          icon={<HomeIcon />}
+        />
+      </Link>
+
+      <Link href="/" passHref>
+        <BottomNavigationAction
+          label="Inventario"
+          // onClick={() => {
+          //   onLink("/a");
+          // }}
+          showLabel
+          icon={<FavoriteIcon />}
+        />
+      </Link>
+      <Link href="/profile" passHref>
+        <BottomNavigationAction
+          label="Perfil"
+          // onClick={() => {
+          //   onLink("/profile");
+          // }}
+          showLabel
+          icon={<PersonIcon />}
+        />
+      </Link>
     </BottomNavigation>
   );
 }
