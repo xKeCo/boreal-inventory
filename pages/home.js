@@ -7,7 +7,7 @@ import useAuth from "../hooks/useAuth";
 import s from "../styles/Home.module.css";
 import Layout from "../components/Layout";
 
-function home() {
+function Inicio() {
   const { signOut } = useAuth();
 
   return (
@@ -29,4 +29,4 @@ function home() {
   );
 }
 
-export default WithAuth(home);
+export default WithAuth(Inicio);

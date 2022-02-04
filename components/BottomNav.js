@@ -36,7 +36,7 @@ export default function SimpleBottomNavigation() {
       showLabels
       onChange={handleChange}
     >
-      <Link href="/home">
+      <Link href="/home" passHref>
         <BottomNavigationAction
           label="Inicio"
           value="/home"
@@ -46,7 +46,7 @@ export default function SimpleBottomNavigation() {
           icon={<HomeIcon />}
         />
       </Link>
-      <Link href="/a">
+      <Link href="/a" passHref>
         <BottomNavigationAction
           label="Inventario"
           value="/"
@@ -56,7 +56,7 @@ export default function SimpleBottomNavigation() {
           icon={<FavoriteIcon />}
         />
       </Link>
-      <Link href="/profile">
+      <Link href="/profile" passHref>
         <BottomNavigationAction
           label="Perfil"
           value="/profile"
