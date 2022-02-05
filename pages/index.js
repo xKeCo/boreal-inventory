@@ -33,11 +33,12 @@ function Home() {
 
       <form className={s.loginContainer} onSubmit={handleSubmit}>
         <Image
-          src="/../public/Logo.svg"
+          src="/Logo.svg"
           alt="Logo"
           className={s.logo}
           width={250}
           height={250}
+          priority
         />
         <TextField
           className={s.loginInput}
