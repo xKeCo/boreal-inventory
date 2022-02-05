@@ -21,7 +21,6 @@ function Home() {
   const handleSubmit = (event) => {
     event.preventDefault();
     signIn(`${values.email}@gmail.com`, values.password);
-    console.log(values);
   };
 
   return (

@@ -5,6 +5,8 @@ import {
   getAuth,
   signOut as signOutAuth,
 } from "firebase/auth";
+import { toast } from "react-hot-toast";
+import { errorConfigTop } from "../config/toastConfig";
 import { app } from "../config/firebase";
 
 const useAuth = () => {
@@ -16,6 +18,15 @@ const useAuth = () => {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.log(error);
+      if (
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password"
+      ) {
+        toast.error(
+          "El usuario y/o la contraseña es incorrecta.",
+          errorConfigTop
+        );
+      }
     }
   };
 
