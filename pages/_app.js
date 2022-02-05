@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
     <AppContextProvider>
       <Component {...pageProps} />
       <Toaster
-        position="bottom-center"
+        position="top-center"
         reverseOrder={false}
         toastOptions={globalConfig}
       />
