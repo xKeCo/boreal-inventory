@@ -2,13 +2,22 @@ import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import s from "../styles/Login.module.css";
-import { Button, TextField } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import WithAuth from "../components/withAuth";
 import Layout from "../components/Layout";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Home() {
-  const [values, setValues] = useState();
+  const [values, setValues] = useState({
+    showPassword: false,
+  });
   const { signIn } = useAuth();
 
   const handleInput = (event) => {
@@ -18,9 +27,20 @@ function Home() {
     });
   };
 
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     signIn(`${values.email}@gmail.com`, values.password);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -48,12 +68,24 @@ function Home() {
           autoFocus
           onChange={handleInput}
         />
-        <TextField
+        <OutlinedInput
           className={s.loginInput}
-          label="Contrase&ntilde;a"
-          variant="outlined"
+          label="Contraseña"
           name="password"
+          type={values.showPassword ? "text" : "password"}
           onChange={handleInput}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
         <Button
           className={s.loginButton}

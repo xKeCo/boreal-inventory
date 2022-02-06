@@ -3,8 +3,13 @@ import Head from "next/head";
 import BottomNav from "../components/BottomNav";
 import WithAuth from "../components/withAuth";
 import Layout from "../components/Layout";
+import { Avatar, Button, Divider } from "@nextui-org/react";
+import useAuth from "../hooks/useAuth";
+import s from "../components/styles/Profile.module.css";
 
 function profile() {
+  const { userData, signOut } = useAuth();
+
   return (
     <>
       <Head>
@@ -13,7 +18,20 @@ function profile() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h1>Perfil</h1>
+        <h2>Perfil</h2>
+        <div className={s.userInfoContainer}>
+          <Avatar squared css={{ w: 100, h: 100 }} src="/Octocat.jpg" />
+          <h3>{userData.name}</h3>
+        </div>
+        <Divider />
+        <Button
+          css={{ mt: "1rem" }}
+          variant="contained"
+          color="primary"
+          onClick={signOut}
+        >
+          Bye
+        </Button>
       </Layout>
       <BottomNav />
     </>

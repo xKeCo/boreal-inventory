@@ -10,17 +10,17 @@ import { errorConfigTop } from "../config/toastConfig";
 import { app } from "../config/firebase";
 
 const useAuth = () => {
-  const { user, loadingUser } = useContext(Context);
+  const { user, userData, loadingUser } = useContext(Context);
   const auth = getAuth(app);
 
   const signIn = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      console.log(error);
       if (
         error.code === "auth/user-not-found" ||
-        error.code === "auth/wrong-password"
+        error.code === "auth/wrong-password" ||
+        error.code === "auth/invalid-email"
       ) {
         toast.error(
           "El usuario y/o la contraseña es incorrecta.",
@@ -37,6 +37,7 @@ const useAuth = () => {
 
   return {
     user,
+    userData,
     loadingUser,
     signIn,
     signOut,
