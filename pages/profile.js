@@ -7,7 +7,7 @@ import { Avatar, Button, Divider } from "@nextui-org/react";
 import useAuth from "../hooks/useAuth";
 import s from "../components/styles/Profile.module.css";
 
-function profile() {
+function Profile() {
   const { userData, signOut } = useAuth();
 
   return (
@@ -38,4 +38,4 @@ function profile() {
   );
 }
 
-export default WithAuth(profile);
+export default WithAuth(Profile);
