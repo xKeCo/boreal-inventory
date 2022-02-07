@@ -1,18 +1,22 @@
 import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
+
+// Styles
 import s from "../styles/Login.module.css";
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
+
+// Hooks
 import useAuth from "../hooks/useAuth";
+
+// Local Components
 import WithAuth from "../components/withAuth";
 import Layout from "../components/Layout";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+// Material UI
+import { Input, Button } from "@nextui-org/react";
+
+// Icons
+import { VisibilityOffRounded, VisibilityRounded } from "@mui/icons-material";
 
 function Home() {
   const [values, setValues] = useState({
@@ -60,15 +64,15 @@ function Home() {
           height={250}
           priority
         />
-        <TextField
-          className={s.loginInput}
-          label="Correo"
+        <Input
+          label="Usuario"
           variant="outlined"
           name="email"
-          autoFocus
           onChange={handleInput}
+          css={{ w: "100%", mw: "440px" }}
+          size="lg"
         />
-        <OutlinedInput
+        {/* <OutlinedInput
           className={s.loginInput}
           label="Contraseña"
           name="password"
@@ -86,12 +90,20 @@ function Home() {
               </IconButton>
             </InputAdornment>
           }
+        /> */}
+        <Input.Password
+          label="Contraseña"
+          name="password"
+          onChange={handleInput}
+          visibleIcon={<VisibilityOffRounded />}
+          hiddenIcon={<VisibilityRounded />}
+          css={{ w: "100%", mw: "440px" }}
+          size="lg"
         />
         <Button
           className={s.loginButton}
+          css={{ w: "100%", bg: "#000" }}
           type="submit"
-          variant="contained"
-          size="large"
         >
           Ingresar
         </Button>

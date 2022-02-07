@@ -1,11 +1,20 @@
 import Head from "next/head";
+
+// Styles
+import s from "../styles/Home.module.css";
+
+// Local Components
 import BottomNav from "../components/BottomNav";
 import WithAuth from "../components/withAuth";
-import usePatients from "../hooks/usePatients";
-import s from "../styles/Home.module.css";
 import CardInfo from "../components/CardInfo";
 import Layout from "../components/Layout";
-import { Collapse, Progress, Text } from "@nextui-org/react";
+
+// Hooks
+import usePatients from "../hooks/usePatients";
+
+// Material UI
+import { Collapse, Input, Progress, Text } from "@nextui-org/react";
+import { SearchRounded } from "@mui/icons-material";
 
 function Inicio() {
   const { docs, loading, error } = usePatients();
@@ -19,6 +28,12 @@ function Inicio() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <h2>Recientes</h2>
+        <Input
+          placeholder="Buscar"
+          css={{ w: "100%", mb: "1.5rem" }}
+          contentRight={<SearchRounded />}
+          bordered
+        />
         {loading ? (
           <Progress
             size="xs"
@@ -42,9 +57,16 @@ function Inicio() {
           </>
         ) : (
           <div className={s.cardContainer}>
-            <Collapse.Group shadow>
+            <Collapse.Group accordion={true} css={{ mb: "5rem" }} shadow>
               {docs.map((doc) => (
-                <CardInfo key={doc.id} name={doc.name} doc={doc.doc} />
+                <>
+                  <CardInfo
+                    key={doc.id}
+                    name={doc.name}
+                    doc={doc.doc}
+                    description={doc.description}
+                  />
+                </>
               ))}
             </Collapse.Group>
           </div>

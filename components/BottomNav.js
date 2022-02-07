@@ -1,22 +1,18 @@
 import { useState } from "react";
-// import { useRouter } from "next/router";
 import Link from "next/link";
 
 // Material UI - Components
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+
+// Icons
 import {
   Home as HomeIcon,
-  Favorite as FavoriteIcon,
+  History as HistoryIcon,
   Person as PersonIcon,
 } from "@mui/icons-material";
 
 export default function SimpleBottomNavigation() {
   const [value, setValue] = useState(0);
-  // const router = useRouter();
-
-  // const onLink = (href) => {
-  //   router.push(href);
-  // };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -40,29 +36,20 @@ export default function SimpleBottomNavigation() {
         <BottomNavigationAction
           label="Inicio"
           value="/home"
-          // onClick={() => {
-          //   onLink("/home");
-          // }}
           icon={<HomeIcon />}
         />
       </Link>
-      <Link href="/a" passHref>
+      <Link href="/history" passHref>
         <BottomNavigationAction
-          label="Inventario"
-          value="/"
-          // onClick={() => {
-          //   onLink("/");
-          // }}
-          icon={<FavoriteIcon />}
+          label="Historial"
+          value="/history"
+          icon={<HistoryIcon />}
         />
       </Link>
       <Link href="/profile" passHref>
         <BottomNavigationAction
           label="Perfil"
           value="/profile"
-          // onClick={() => {
-          //   onLink("/profile");
-          // }}
           icon={<PersonIcon />}
         />
       </Link>

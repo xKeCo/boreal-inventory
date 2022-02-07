@@ -1,13 +1,21 @@
 import React from "react";
 import Head from "next/head";
+
+// Styles
+import s from "../components/styles/Profile.module.css";
+
+// Local Components
 import BottomNav from "../components/BottomNav";
 import WithAuth from "../components/withAuth";
 import Layout from "../components/Layout";
-import { Avatar, Button, Divider } from "@nextui-org/react";
-import useAuth from "../hooks/useAuth";
-import s from "../components/styles/Profile.module.css";
 
-function profile() {
+// Hooks
+import useAuth from "../hooks/useAuth";
+
+// Material UI
+import { Avatar, Button, Divider } from "@nextui-org/react";
+
+function Profile() {
   const { userData, signOut } = useAuth();
 
   return (
@@ -23,19 +31,17 @@ function profile() {
           <Avatar squared css={{ w: 100, h: 100 }} src="/Octocat.jpg" />
           <h3>{userData.name}</h3>
         </div>
-        <Divider />
-        <Button
-          css={{ mt: "1rem" }}
-          variant="contained"
-          color="primary"
-          onClick={signOut}
-        >
-          Bye
-        </Button>
+        <Divider css={{ mb: "1rem" }} />
+        <Button.Group size="lg" vertical auto css={{ w: "100%" }}>
+          <Button css={{ bg: "#000", color: "#fff" }}>Pacientes</Button>
+          <Button css={{ bg: "#000", color: "#fff" }} onClick={signOut}>
+            Cerrar sesión
+          </Button>
+        </Button.Group>
       </Layout>
       <BottomNav />
     </>
   );
 }
 
-export default WithAuth(profile);
+export default WithAuth(Profile);
