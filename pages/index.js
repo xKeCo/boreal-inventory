@@ -31,20 +31,9 @@ function Home() {
     });
   };
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     signIn(`${values.email}@gmail.com`, values.password);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
   };
 
   return (
@@ -72,25 +61,6 @@ function Home() {
           css={{ w: "100%", mw: "440px" }}
           size="lg"
         />
-        {/* <OutlinedInput
-          className={s.loginInput}
-          label="Contraseña"
-          name="password"
-          type={values.showPassword ? "text" : "password"}
-          onChange={handleInput}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {values.showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-        /> */}
         <Input.Password
           label="Contraseña"
           name="password"

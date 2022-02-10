@@ -32,7 +32,7 @@ function Inicio() {
           placeholder="Buscar"
           css={{ w: "100%", mb: "1.5rem" }}
           contentRight={<SearchRounded />}
-          bordered
+          disabled
         />
         {loading ? (
           <Progress
@@ -57,16 +57,23 @@ function Inicio() {
           </>
         ) : (
           <div className={s.cardContainer}>
-            <Collapse.Group accordion={true} css={{ mb: "5rem" }} shadow>
+            <Collapse.Group
+              accordion={true}
+              css={{ mb: "5rem", w: "100%" }}
+              shadow
+            >
               {docs.map((doc) => (
-                <>
-                  <CardInfo
-                    key={doc.id}
-                    name={doc.name}
-                    doc={doc.doc}
-                    description={doc.description}
-                  />
-                </>
+                <CardInfo
+                  key={doc.id}
+                  name={doc.name}
+                  doc={doc.doc}
+                  time={doc.time}
+                  date={doc.date}
+                  image={doc.image}
+                  description={doc.description}
+                  pago={doc.pago}
+                  metodo={doc.metodo}
+                />
               ))}
             </Collapse.Group>
           </div>

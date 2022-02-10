@@ -9,6 +9,7 @@ import {
   Home as HomeIcon,
   History as HistoryIcon,
   Person as PersonIcon,
+  Add,
 } from "@mui/icons-material";
 
 export default function SimpleBottomNavigation() {
@@ -45,6 +46,9 @@ export default function SimpleBottomNavigation() {
           value="/history"
           icon={<HistoryIcon />}
         />
+      </Link>
+      <Link href="/add" passHref>
+        <BottomNavigationAction label="Add" value="/add" icon={<Add />} />
       </Link>
       <Link href="/profile" passHref>
         <BottomNavigationAction

@@ -6,11 +6,22 @@ import Layout from "../components/Layout";
 import BottomNav from "../components/BottomNav";
 
 // Material UI
-import { Divider, Input } from "@nextui-org/react";
+import { Avatar, Input, Progress } from "@nextui-org/react";
 import { SearchRounded } from "@mui/icons-material";
-import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+
+// hooks
+import usePatients from "../hooks/usePatients";
 
 function History() {
+  const { docs, loading, error } = usePatients();
+
   return (
     <>
       <Head>
@@ -24,90 +35,70 @@ function History() {
           placeholder="Buscar"
           css={{ w: "100%" }}
           contentRight={<SearchRounded />}
-          bordered
+          disabled
         />
 
-        <List
-          sx={{
-            width: "100%",
-            marginTop: "1.5rem",
-          }}
-        >
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary="Oui Oui"
-              secondary={
-                <>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    Sandra Adams
-                  </Typography>
-                  {" — Do you have Paris recommendations? Have you ever…"}
-                </>
-              }
+        {loading ? (
+          <Progress
+            size="xs"
+            indeterminated
+            color="primary"
+            status="primary"
+            css={{ mb: "1rem" }}
+          />
+        ) : error ? (
+          <>
+            <Progress
+              size="xs"
+              indeterminated
+              color="primary"
+              status="primary"
+              css={{ mb: "1rem" }}
             />
-          </ListItem>
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary="Brunch this weekend?"
-              secondary={
-                <>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    Ali Connors
-                  </Typography>
-                  {" — I'll be in your neighborhood doing errands this…"}
-                </>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary="Summer BBQ"
-              secondary={
-                <>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    to Scott, Alex, Jennifer
-                  </Typography>
-                  {" — Wish I could come, but I'm out of town this…"}
-                </>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary="Oui Oui"
-              secondary={
-                <>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    Sandra Adams
-                  </Typography>
-                  {" — Do you have Paris recommendations? Have you ever…"}
-                </>
-              }
-            />
-          </ListItem>
-        </List>
+            <Text css={{ mb: "1rem" }}>
+              Error al cargar los pacientes, por favor intentalo mas tarde.
+            </Text>
+          </>
+        ) : (
+          <List
+            sx={{
+              width: "100%",
+              marginTop: "1.5rem",
+            }}
+          >
+            {docs.map((doc) => (
+              <ListItem key={doc.id} alignItems="center">
+                <ListItemAvatar>
+                  <Avatar src="/Octocat.jpg" />
+                </ListItemAvatar>
+                <ListItemText
+                  secondary={
+                    <>
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        {doc.doc}
+                      </Typography>
+                      {` ha atendido a `}
+                      <Typography
+                        sx={{ display: "inline" }}
+                        component="span"
+                        variant="body2"
+                        color="text.primary"
+                      >
+                        {doc.name}.
+                      </Typography>
+                      {` ${doc.date} - ${doc.time} `}
+                    </>
+                  }
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
       </Layout>
       <BottomNav />
     </>
