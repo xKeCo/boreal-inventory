@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import BottomNav from "../components/BottomNav";
 
 // Material UI
-import { Avatar, Input, Progress } from "@nextui-org/react";
+import { Avatar, Input, Progress, Text } from "@nextui-org/react";
 import { SearchRounded } from "@mui/icons-material";
 import {
   List,
@@ -56,7 +56,7 @@ function History() {
               css={{ mb: "1rem" }}
             />
             <Text css={{ mb: "1rem" }}>
-              Error al cargar los pacientes, por favor intentalo mas tarde.
+              Error al cargar el Historial, por favor intentalo mas tarde.
             </Text>
           </>
         ) : (
