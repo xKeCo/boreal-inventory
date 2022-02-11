@@ -11,9 +11,11 @@ import {
   Person as PersonIcon,
   Add,
 } from "@mui/icons-material";
+import useAuth from "../hooks/useAuth";
 
 export default function SimpleBottomNavigation() {
   const [value, setValue] = useState(0);
+  const { userData } = useAuth();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -33,20 +35,24 @@ export default function SimpleBottomNavigation() {
       showLabels
       onChange={handleChange}
     >
-      <Link href="/home" passHref>
-        <BottomNavigationAction
-          label="Inicio"
-          value="/home"
-          icon={<HomeIcon />}
-        />
-      </Link>
-      <Link href="/history" passHref>
-        <BottomNavigationAction
-          label="Historial"
-          value="/history"
-          icon={<HistoryIcon />}
-        />
-      </Link>
+      {userData.name === "Dra. Sandra Peña" && (
+        <Link href="/home" passHref>
+          <BottomNavigationAction
+            label="Inicio"
+            value="/home"
+            icon={<HomeIcon />}
+          />
+        </Link>
+      )}
+      {userData.name === "Dra. Sandra Peña" && (
+        <Link href="/history" passHref>
+          <BottomNavigationAction
+            label="Historial"
+            value="/history"
+            icon={<HistoryIcon />}
+          />
+        </Link>
+      )}
       <Link href="/add" passHref>
         <BottomNavigationAction label="Add" value="/add" icon={<Add />} />
       </Link>

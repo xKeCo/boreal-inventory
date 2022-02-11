@@ -28,7 +28,7 @@ function Profile() {
       <Layout>
         <h2>Perfil</h2>
         <div className={s.userInfoContainer}>
-          <Avatar squared css={{ w: 100, h: 100 }} src="/Octocat.jpg" />
+          <Avatar squared css={{ w: 100, h: 100 }} src={userData.image} />
           <h3>{userData.name}</h3>
         </div>
         <Divider css={{ mb: "1rem" }} />
