@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 // Local components
 import Layout from "../components/Layout";
@@ -54,6 +55,8 @@ const Add = () => {
   // Database declarations
   const db = getFirestore(app);
   const storage = getStorage(app);
+  // Router
+  const router = useRouter();
   // Data actual user
   const { userData } = useAuth();
   const {
@@ -97,7 +100,6 @@ const Add = () => {
           return 0;
         });
       setSelectOption(newSelectOption);
-      console.log("entro");
     }
   }, [inventory]);
 
@@ -191,7 +193,8 @@ const Add = () => {
             stock: material.stock - material.quantity,
           });
         });
-        await getInventoryData();
+
+        router.reload(window.location.pathname);
         setSelectedMaterials([]);
         setLoading(false);
         setVisible(false);
