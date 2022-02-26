@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 
 // Local components
@@ -38,7 +38,13 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getFirestore,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import useAuth from "../hooks/useAuth";
 import useInventory from "../hooks/useInventory";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -54,6 +60,7 @@ const Add = () => {
     inventory,
     loading: loadInventory,
     error: errorInventory,
+    getInventoryData,
   } = useInventory();
 
   // state declarations - Information
@@ -68,23 +75,32 @@ const Add = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const SelectOption = inventory
-    .filter((material) => material.stock > 0)
-    .map((item) => ({
-      value: item.id,
-      label: item.name,
-      quantity: 1,
-      stock: item.stock,
-    }))
-    .sort((a, b) => {
-      if (a.label < b.label) {
-        return -1;
-      }
-      if (a.label > b.label) {
-        return 1;
-      }
-      return 0;
-    });
+  const [SelectOption, setSelectOption] = useState([]);
+
+  useEffect(() => {
+    if (inventory.length) {
+      const newSelectOption = inventory
+        .filter((material) => material.stock > 0)
+        .map((item) => ({
+          value: item.id,
+          label: item.name,
+          quantity: 1,
+          stock: item.stock,
+        }))
+        .sort((a, b) => {
+          if (a.label < b.label) {
+            return -1;
+          }
+          if (a.label > b.label) {
+            return 1;
+          }
+          return 0;
+        });
+      setSelectOption(newSelectOption);
+      console.log("entro");
+    }
+  }, [inventory]);
+
   // Handler for the modal
   const [visible, setVisible] = useState(false);
   const handler = () => setVisible(true);
@@ -168,6 +184,15 @@ const Add = () => {
             quantity: material.quantity,
           })),
         });
+
+        selectedMaterials.forEach(async (material) => {
+          const materialRef = doc(db, "inventory", material.value);
+          await updateDoc(materialRef, {
+            stock: material.stock - material.quantity,
+          });
+        });
+        await getInventoryData();
+        setSelectedMaterials([]);
         setLoading(false);
         setVisible(false);
         toast.success(
@@ -234,13 +259,13 @@ const Add = () => {
           <Spacer y={0.8} />
           <Input
             width="186px"
-            label="Time"
+            label="Hora"
             type="time"
             onChange={(e) => setTime(e.target.value)}
           />
           <Input
             width="130px"
-            label="Date"
+            label="Fecha  "
             type="date"
             onChange={(e) => setDate(e.target.value)}
           />
@@ -325,7 +350,7 @@ const Add = () => {
                           <AddIcon fill="currentColor" sx={{ fontSize: 15 }} />
                         }
                         onClick={() => handleIncrement(item.value)}
-                        disabled={item.quantity === item.stockx}
+                        disabled={item.quantity === item.stock}
                       />
                     </div>
                   </div>
