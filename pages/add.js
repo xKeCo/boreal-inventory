@@ -74,8 +74,17 @@ const Add = () => {
       value: item.id,
       label: item.name,
       quantity: 1,
-    }));
-
+      stock: item.stock,
+    }))
+    .sort((a, b) => {
+      if (a.label < b.label) {
+        return -1;
+      }
+      if (a.label > b.label) {
+        return 1;
+      }
+      return 0;
+    });
   // Handler for the modal
   const [visible, setVisible] = useState(false);
   const handler = () => setVisible(true);
@@ -153,7 +162,11 @@ const Add = () => {
           pago: pago,
           metodo: metodo,
           searchid: name.toLowerCase().trim() || "",
-          materials: selectedMaterials,
+          materials: selectedMaterials.map((material) => ({
+            id: material.value,
+            name: material.label,
+            quantity: material.quantity,
+          })),
         });
         setLoading(false);
         setVisible(false);
@@ -279,7 +292,7 @@ const Add = () => {
                 closeMenuOnSelect={false}
                 isLoading={loadInventory}
                 isDisabled={loadInventory}
-                isSearchable
+                // isSearchable
                 menuPlacement="top"
                 onChange={(e) => setSelectedMaterials(e)}
               />
@@ -312,10 +325,45 @@ const Add = () => {
                           <AddIcon fill="currentColor" sx={{ fontSize: 15 }} />
                         }
                         onClick={() => handleIncrement(item.value)}
+                        disabled={item.quantity === item.stock}
                       />
                     </div>
                   </div>
                 ))}
+              <Modal
+                closeButton
+                blur
+                aria-labelledby="modal-title"
+                open={visible}
+                onClose={closeHandler}
+              >
+                <Modal.Header>
+                  <Text b size={18}>
+                    ¿ La información es Correcta ?
+                  </Text>
+                </Modal.Header>
+                <Modal.Body>
+                  <Text>
+                    Esta Información no puede ser modificada, por favor
+                    asegurate de llenar todos los campos y que la información
+                    sea correcta. Gracias.
+                  </Text>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    auto
+                    flat
+                    size="sm"
+                    color="error"
+                    onClick={closeHandler}
+                  >
+                    Cerrar
+                  </Button>
+                  <Button auto size="sm" onClick={handleSubmit}>
+                    Agregar
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </>
           )}
 
@@ -339,33 +387,6 @@ const Add = () => {
       )}
 
       <BottomNav />
-      <Modal
-        closeButton
-        blur
-        aria-labelledby="modal-title"
-        open={visible}
-        onClose={closeHandler}
-      >
-        <Modal.Header>
-          <Text b size={18}>
-            ¿ La información es Correcta ?
-          </Text>
-        </Modal.Header>
-        <Modal.Body>
-          <Text>
-            Esta Información no puede ser modificada, por favor asegurate de
-            llenar todos los campos y que la información sea correcta. Gracias.
-          </Text>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button auto flat size="sm" color="error" onClick={closeHandler}>
-            Cerrar
-          </Button>
-          <Button auto size="sm" onClick={handleSubmit}>
-            Agregar
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 };

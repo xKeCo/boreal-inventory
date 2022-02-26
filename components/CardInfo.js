@@ -21,6 +21,7 @@ export default function CardInfo({
   image,
   pago,
   metodo,
+  materials,
 }) {
   const [visible, setVisible] = useState(false);
   const [visibleImage, setVisibleImage] = useState(false);
@@ -38,7 +39,7 @@ export default function CardInfo({
 
   return (
     <>
-      <Collapse key={id} title={name} subtitle={doc}>
+      <Collapse title={name} subtitle={doc}>
         {/* <p>{description}</p> */}
         <Row css={{ gap: "0.5rem" }}>
           <Text h5>Hora: {time}</Text>
@@ -95,11 +96,11 @@ export default function CardInfo({
           </Text>
 
           <Container css={{ d: "flex", gap: "1rem", mb: "10px" }}>
-            {description && <Text>Guantes: 1</Text>}
-            {description && <Text>Guantes: 1</Text>}
-            {description && <Text>Guantes: 1</Text>}
-            {description && <Text>Guantes: 1</Text>}
-            {description && <Text>Guantes: 1</Text>}
+            {materials.map((material) => (
+              <Text size={13} key={material.id}>
+                {material.name}: <span>{material.quantity}</span>
+              </Text>
+            ))}
           </Container>
 
           {pago === "Si" ? (
@@ -119,7 +120,7 @@ export default function CardInfo({
         </Modal.Body>
         <Modal.Footer>
           <Row css={{ jc: "space-between", ai: "center" }}>
-            <Button auto onClick={handlerImage}>
+            <Button auto onClick={handlerImage} disabled={!image}>
               Ver Imagen
             </Button>
             <Button auto onClick={closeHandler}>

@@ -75,6 +75,7 @@ function Inicio() {
                   description={doc.description}
                   pago={doc.pago}
                   metodo={doc.metodo}
+                  materials={doc.materials}
                 />
               ))}
             </Collapse.Group>
