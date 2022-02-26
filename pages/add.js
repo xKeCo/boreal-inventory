@@ -292,7 +292,7 @@ const Add = () => {
                 closeMenuOnSelect={false}
                 isLoading={loadInventory}
                 isDisabled={loadInventory}
-                // isSearchable
+                isSearchable={false}
                 menuPlacement="top"
                 onChange={(e) => setSelectedMaterials(e)}
               />
@@ -325,7 +325,7 @@ const Add = () => {
                           <AddIcon fill="currentColor" sx={{ fontSize: 15 }} />
                         }
                         onClick={() => handleIncrement(item.value)}
-                        disabled={item.quantity === item.stock}
+                        disabled={item.quantity === item.stockx}
                       />
                     </div>
                   </div>
