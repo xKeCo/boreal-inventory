@@ -91,8 +91,7 @@ const Add = () => {
         date !== "" &&
         time !== "" &&
         description !== "" &&
-        pago !== "" &&
-        metodo !== ""
+        pago !== ""
       ) {
         await addDoc(collection(db, "patients"), {
           name: name,
@@ -101,6 +100,7 @@ const Add = () => {
           time: time,
           description: description,
           image: url || "",
+          imageDoc: userData.image,
           pago: pago,
           metodo: metodo,
           searchid: name.toLowerCase().trim() || "",

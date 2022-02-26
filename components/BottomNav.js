@@ -35,7 +35,7 @@ export default function SimpleBottomNavigation() {
       showLabels
       onChange={handleChange}
     >
-      {userData.name === "Dra. Sandra Peña" && (
+      {userData.role === "admin" && (
         <Link href="/home" passHref>
           <BottomNavigationAction
             label="Inicio"
@@ -44,7 +44,8 @@ export default function SimpleBottomNavigation() {
           />
         </Link>
       )}
-      {userData.name === "Dra. Sandra Peña" && (
+
+      {userData.role === "admin" && (
         <Link href="/history" passHref>
           <BottomNavigationAction
             label="Historial"
@@ -53,9 +54,11 @@ export default function SimpleBottomNavigation() {
           />
         </Link>
       )}
+
       <Link href="/add" passHref>
         <BottomNavigationAction label="Add" value="/add" icon={<Add />} />
       </Link>
+
       <Link href="/profile" passHref>
         <BottomNavigationAction
           label="Perfil"

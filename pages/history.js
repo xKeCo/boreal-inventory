@@ -59,6 +59,8 @@ function History() {
               Error al cargar el Historial, por favor intentalo mas tarde.
             </Text>
           </>
+        ) : docs.length <= 0 ? (
+          <Text css={{ mt: "1rem" }}>Aun no hay pacientes agregados.</Text>
         ) : (
           <List
             sx={{
@@ -69,7 +71,7 @@ function History() {
             {docs.map((doc) => (
               <ListItem key={doc.id} alignItems="center">
                 <ListItemAvatar>
-                  <Avatar src="/Octocat.jpg" />
+                  <Avatar src={doc.imageDoc} />
                 </ListItemAvatar>
                 <ListItemText
                   secondary={

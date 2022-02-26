@@ -55,6 +55,8 @@ function Inicio() {
               Error al cargar los pacientes, por favor intentalo mas tarde.
             </Text>
           </>
+        ) : docs.length <= 0 ? (
+          <Text>Aun no hay pacientes agregados.</Text>
         ) : (
           <div className={s.cardContainer}>
             <Collapse.Group

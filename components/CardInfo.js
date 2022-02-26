@@ -40,7 +40,10 @@ export default function CardInfo({
     <>
       <Collapse key={id} title={name} subtitle={doc}>
         {/* <p>{description}</p> */}
-        <Text h5>Hora: {time}</Text>
+        <Row css={{ gap: "0.5rem" }}>
+          <Text h5>Hora: {time}</Text>
+          <Text h5>Fecha: {date}</Text>
+        </Row>
         <Divider css={{ m: "10px 0" }} />
         <Text>{description}</Text>
         <Divider css={{ m: "10px 0" }} />
