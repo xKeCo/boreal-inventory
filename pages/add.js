@@ -5,16 +5,26 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import BottomNav from "../components/BottomNav";
 
+// React Select
+import Select from "react-select";
+
 // Material UI - Components
 import {
   Button,
   Input,
   Modal,
   Progress,
+  Row,
   Spacer,
   Text,
   Textarea,
 } from "@nextui-org/react";
+
+// Material UI - Icons
+import { Add as AddIcon, Remove as RemoveIcon } from "@mui/icons-material";
+
+// Styles
+import s from "../styles/Add.module.css";
 
 // Alerts
 import { toast } from "react-hot-toast";
@@ -30,6 +40,7 @@ import {
 } from "firebase/storage";
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 import useAuth from "../hooks/useAuth";
+import useInventory from "../hooks/useInventory";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import Loader from "../components/Loader";
 
@@ -39,6 +50,11 @@ const Add = () => {
   const storage = getStorage(app);
   // Data actual user
   const { userData } = useAuth();
+  const {
+    inventory,
+    loading: loadInventory,
+    error: errorInventory,
+  } = useInventory();
 
   // state declarations - Information
   const [name, setName] = useState("");
@@ -48,8 +64,17 @@ const Add = () => {
   const [metodo, setMetodo] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
+  const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const SelectOption = inventory
+    .filter((material) => material.stock > 0)
+    .map((item) => ({
+      value: item.id,
+      label: item.name,
+      quantity: 1,
+    }));
 
   // Handler for the modal
   const [visible, setVisible] = useState(false);
@@ -64,6 +89,30 @@ const Add = () => {
   };
   const handleChangeMetodo = (event) => {
     setMetodo(event.target.value);
+  };
+
+  // Increment the quantity of the material
+
+  const handleIncrement = (id) => {
+    const newSelectedMaterials = selectedMaterials.map((material) => {
+      if (material.value === id) {
+        material.quantity += 1;
+      }
+      return material;
+    });
+    setSelectedMaterials(newSelectedMaterials);
+  };
+
+  //  Decrement the quantity of the material
+
+  const handleDecrement = (id) => {
+    const newSelectedMaterials = selectedMaterials.map((material) => {
+      if (material.value === id) {
+        material.quantity -= 1;
+      }
+      return material;
+    });
+    setSelectedMaterials(newSelectedMaterials);
   };
 
   // Handler for uploading the file
@@ -104,6 +153,7 @@ const Add = () => {
           pago: pago,
           metodo: metodo,
           searchid: name.toLowerCase().trim() || "",
+          materials: selectedMaterials,
         });
         setLoading(false);
         setVisible(false);
@@ -217,11 +267,63 @@ const Add = () => {
 
           <h5>Materiales utilizados</h5>
 
+          {errorInventory ? (
+            <p>
+              Error al cargar los materiales, por favor intentalo mas tarde.
+            </p>
+          ) : (
+            <>
+              <Select
+                options={SelectOption}
+                isMulti
+                closeMenuOnSelect={false}
+                isLoading={loadInventory}
+                isDisabled={loadInventory}
+                isSearchable
+                menuPlacement="top"
+                onChange={(e) => setSelectedMaterials(e)}
+              />
+              <Spacer y={0.8} />
+
+              {selectedMaterials.length > 0 &&
+                selectedMaterials.map((item) => (
+                  <div className={s.MaterialsContainer} key={item.value}>
+                    <Text css={{ fontSize: "14px" }}>{item.label}</Text>
+                    <div className={s.MaterialsContainer__Buttons}>
+                      <Button
+                        auto
+                        size="xs"
+                        icon={
+                          <RemoveIcon
+                            fill="currentColor"
+                            sx={{ fontSize: 15 }}
+                          />
+                        }
+                        disabled={item.quantity === 1}
+                        onClick={() => handleDecrement(item.value)}
+                      />
+
+                      <Text css={{ fontSize: "14px" }}>{item.quantity}</Text>
+
+                      <Button
+                        auto
+                        size="xs"
+                        icon={
+                          <AddIcon fill="currentColor" sx={{ fontSize: 15 }} />
+                        }
+                        onClick={() => handleIncrement(item.value)}
+                      />
+                    </div>
+                  </div>
+                ))}
+            </>
+          )}
+
+          <Spacer y={0.8} />
+
           <Input
-            label="Imagen del evento"
-            size="large"
+            label="Imagen de los materiales"
             type="file"
-            placeholder="Descripcion del evento"
             onChange={(e) => {
               e.target.files[0] && setFile(e.target.files[0]);
             }}
