@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     <AppContextProvider>
       <Head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/logo.svg" />
+        <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="icon" href="/logo.svg" />
         <meta name="theme-color" content="#fff" />
       </Head>
