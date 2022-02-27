@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="theme-color" content="#fff" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="https://boreal-inventory.vercel.app/Logo.svg" />
+        <link rel="icon" href="https://boreal-inventory.vercel.app/Logo.png" />
         <link
           rel="apple-touch-icon"
           href="https://boreal-inventory.vercel.app/Logo.png"

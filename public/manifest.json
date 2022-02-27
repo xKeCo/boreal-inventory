@@ -13,48 +13,48 @@
       "short_name": "Añadir paciente",
       "description": "Añadir paciente",
       "url": "/add",
-      "icons": [{ "src": "/Logo.svg", "sizes": "192x192" }]
+      "icons": [{ "src": "/Logo.png", "sizes": "192x192" }]
     }
   ],
   "icons": [
     {
-      "src": "/Logo.svg",
+      "src": "/Logo.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/Logo.svg",
+      "src": "/Logo.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/Logo.svg",
+      "src": "/Logo.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/Logo.svg",
+      "src": "/Logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/Logo.svg",
+      "src": "/Logo.png",
       "sizes": "256x256",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/Logo.svg",
+      "src": "/Logo.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/Logo.svg",
+      "src": "/Logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
