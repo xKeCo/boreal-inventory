@@ -8,10 +8,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <AppContextProvider>
       <Head>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/logo.png" />
-        <link rel="icon" href="/logo.svg" />
         <meta name="theme-color" content="#fff" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="https://boreal-inventory.vercel.app/Logo.svg" />
+        <link
+          rel="apple-touch-icon"
+          href="https://boreal-inventory.vercel.app/Logo.png"
+        />
       </Head>
       <Component {...pageProps} />
       <Toaster
