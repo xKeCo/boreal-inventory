@@ -1,0 +1,26 @@
+.MaterialsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.MaterialsContainer__Buttons {
+  display: grid;
+  grid-template-columns: auto 0.3rem auto;
+  place-items: center;
+  align-items: center;
+  justify-self: flex-end;
+  gap: 1rem;
+}
+
+/* @media screen and (max-width: 320px) {
+  .MaterialsContainer {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .MaterialsContainer__Buttons {
+    justify-self: center;
+  }
+} */

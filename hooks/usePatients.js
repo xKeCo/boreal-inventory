@@ -19,7 +19,12 @@ const usePatients = () => {
   const getPatientsData = async () => {
     try {
       const docsRef = collection(db, "patients");
-      const patients = await getDocs(docsRef);
+      const q = query(
+        docsRef,
+        orderBy("date", "desc"),
+        orderBy("time", "desc")
+      );
+      const patients = await getDocs(q);
       const docs = patients.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -27,6 +32,7 @@ const usePatients = () => {
       setDocs(docs);
       setLoading(false);
     } catch (error) {
+      console.log(error);
       setError(error);
       setLoading(false);
     }
