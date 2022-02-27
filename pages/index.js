@@ -46,7 +46,7 @@ function Home() {
 
       <form className={s.loginContainer} onSubmit={handleSubmit}>
         <Image
-          src="/Logo.svg"
+          src="/Logo.png"
           alt="Logo"
           className={s.logo}
           width={250}
