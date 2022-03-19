@@ -5,6 +5,7 @@ import {
   getDocs,
   getFirestore,
   orderBy,
+  limit,
 } from "firebase/firestore";
 import { app } from "../config/firebase";
 
@@ -22,7 +23,8 @@ const usePatients = () => {
       const q = query(
         docsRef,
         orderBy("date", "desc"),
-        orderBy("time", "desc")
+        orderBy("time", "desc"),
+        limit(10)
       );
       const patients = await getDocs(q);
       const docs = patients.docs.map((doc) => ({
