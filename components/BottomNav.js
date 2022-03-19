@@ -27,12 +27,12 @@ export default function SimpleBottomNavigation() {
   const path = router.pathname;
 
   return (
-    <div>
+    <>
       <div className={s.bottomNav}>
         {userData.role === "admin" && (
           <>
-            <div className={s.bottomNav__iconContainer}>
-              <Link href="/">
+            <Link href="/">
+              <div className={s.bottomNav__iconContainer}>
                 <a>
                   {path === "/home" ? (
                     <Image
@@ -52,11 +52,11 @@ export default function SimpleBottomNavigation() {
                     />
                   )}
                 </a>
-              </Link>
-            </div>
+              </div>
+            </Link>
 
-            <div className={s.bottomNav__iconContainer}>
-              <Link href="/history">
+            <Link href="/history">
+              <div className={s.bottomNav__iconContainer}>
                 <a>
                   {path === "/history" ? (
                     <Image
@@ -76,13 +76,13 @@ export default function SimpleBottomNavigation() {
                     />
                   )}
                 </a>
-              </Link>
-            </div>
+              </div>
+            </Link>
           </>
         )}
 
-        <div className={s.bottomNav__iconContainer}>
-          <Link href="/add">
+        <Link href="/add">
+          <div className={s.bottomNav__iconContainer}>
             <a>
               {path === "/add" ? (
                 <Image
@@ -102,10 +102,10 @@ export default function SimpleBottomNavigation() {
                 />
               )}
             </a>
-          </Link>
-        </div>
-        <div className={s.bottomNav__iconContainer}>
-          <Link href="/profile">
+          </div>
+        </Link>
+        <Link href="/profile">
+          <div className={s.bottomNav__iconContainer}>
             <a>
               {path === "/profile" ? (
                 <Image
@@ -125,9 +125,9 @@ export default function SimpleBottomNavigation() {
                 />
               )}
             </a>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
-    </div>
+    </>
   );
 }

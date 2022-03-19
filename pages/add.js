@@ -407,7 +407,7 @@ const Add = () => {
           />
 
           <Spacer y={0.8} />
-          <Button css={{ w: "100%", mb: "5rem" }} size="sm" onClick={handler}>
+          <Button css={{ w: "100%", mb: "7rem" }} size="sm" onClick={handler}>
             Añadir
           </Button>
           <Spacer y={0} />
