@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 //hooks
 import useAuth from "../hooks/useAuth";
@@ -21,10 +22,9 @@ import addFilled from "../public/addFilled.svg";
 export default function SimpleBottomNavigation() {
   const [value, setValue] = useState(0);
   const { userData } = useAuth();
+  const router = useRouter();
 
-  //Funcion para ver el path actual
-  const url = window.location.href;
-  const path = url.split("/")[3];
+  const path = router.pathname;
 
   return (
     <div>
@@ -34,7 +34,7 @@ export default function SimpleBottomNavigation() {
             <div className={s.bottomNav__iconContainer}>
               <Link href="/">
                 <a>
-                  {path === "home" ? (
+                  {path === "/home" ? (
                     <Image
                       src={homeFilled}
                       alt="Logo"
@@ -58,7 +58,7 @@ export default function SimpleBottomNavigation() {
             <div className={s.bottomNav__iconContainer}>
               <Link href="/history">
                 <a>
-                  {path === "history" ? (
+                  {path === "/history" ? (
                     <Image
                       src={historyFilled}
                       alt="Logo"
@@ -84,7 +84,7 @@ export default function SimpleBottomNavigation() {
         <div className={s.bottomNav__iconContainer}>
           <Link href="/add">
             <a>
-              {path === "add" ? (
+              {path === "/add" ? (
                 <Image
                   src={addFilled}
                   alt="Logo"
@@ -107,7 +107,7 @@ export default function SimpleBottomNavigation() {
         <div className={s.bottomNav__iconContainer}>
           <Link href="/profile">
             <a>
-              {path === "profile" ? (
+              {path === "/profile" ? (
                 <Image
                   src={userFilled}
                   alt="Logo"
