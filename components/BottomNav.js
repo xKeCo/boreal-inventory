@@ -1,72 +1,133 @@
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
-// Material UI - Components
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-
-// Icons
-import {
-  Home as HomeIcon,
-  History as HistoryIcon,
-  Person as PersonIcon,
-  Add,
-} from "@mui/icons-material";
+//hooks
 import useAuth from "../hooks/useAuth";
+
+//styles
+import s from "./styles/BottomNav.module.css";
+
+//Svgs
+import home from "../public/home.svg";
+import homeFilled from "../public/homeFilled.svg";
+import history from "../public/history.svg";
+import historyFilled from "../public/historyFilled.svg";
+import user from "../public/user.svg";
+import userFilled from "../public/userFilled.svg";
+import add from "../public/add.svg";
+import addFilled from "../public/addFilled.svg";
 
 export default function SimpleBottomNavigation() {
   const [value, setValue] = useState(0);
   const { userData } = useAuth();
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  //Funcion para ver el path actual
+  const url = window.location.href;
+  const path = url.split("/")[3];
 
   return (
-    <BottomNavigation
-      sx={{
-        borderTop: "1px solid #e0e0e0",
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        width: "100%",
-        height: "5rem",
-      }}
-      value={value}
-      showLabels
-      onChange={handleChange}
-    >
-      {userData.role === "admin" && (
-        <Link href="/home" passHref>
-          <BottomNavigationAction
-            label="Inicio"
-            value="/home"
-            icon={<HomeIcon />}
-          />
-        </Link>
-      )}
+    <div>
+      <div className={s.bottomNav}>
+        {userData.role === "admin" && (
+          <>
+            <div className={s.bottomNav__iconContainer}>
+              <Link href="/">
+                <a>
+                  {path === "home" ? (
+                    <Image
+                      src={homeFilled}
+                      alt="Logo"
+                      className={s.logo}
+                      width={25}
+                      height={25}
+                    />
+                  ) : (
+                    <Image
+                      src={home}
+                      alt="Logo"
+                      className={s.logo}
+                      width={25}
+                      height={25}
+                    />
+                  )}
+                </a>
+              </Link>
+            </div>
 
-      {userData.role === "admin" && (
-        <Link href="/history" passHref>
-          <BottomNavigationAction
-            label="Historial"
-            value="/history"
-            icon={<HistoryIcon />}
-          />
-        </Link>
-      )}
+            <div className={s.bottomNav__iconContainer}>
+              <Link href="/history">
+                <a>
+                  {path === "history" ? (
+                    <Image
+                      src={historyFilled}
+                      alt="Logo"
+                      className={s.logo}
+                      width={25}
+                      height={25}
+                    />
+                  ) : (
+                    <Image
+                      src={history}
+                      alt="Logo"
+                      className={s.logo}
+                      width={25}
+                      height={25}
+                    />
+                  )}
+                </a>
+              </Link>
+            </div>
+          </>
+        )}
 
-      <Link href="/add" passHref>
-        <BottomNavigationAction label="Add" value="/add" icon={<Add />} />
-      </Link>
-
-      <Link href="/profile" passHref>
-        <BottomNavigationAction
-          label="Perfil"
-          value="/profile"
-          icon={<PersonIcon />}
-        />
-      </Link>
-    </BottomNavigation>
+        <div className={s.bottomNav__iconContainer}>
+          <Link href="/add">
+            <a>
+              {path === "add" ? (
+                <Image
+                  src={addFilled}
+                  alt="Logo"
+                  className={s.logo}
+                  width={25}
+                  height={25}
+                />
+              ) : (
+                <Image
+                  src={add}
+                  alt="Logo"
+                  className={s.logo}
+                  width={25}
+                  height={25}
+                />
+              )}
+            </a>
+          </Link>
+        </div>
+        <div className={s.bottomNav__iconContainer}>
+          <Link href="/profile">
+            <a>
+              {path === "profile" ? (
+                <Image
+                  src={userFilled}
+                  alt="Logo"
+                  className={s.logo}
+                  width={25}
+                  height={25}
+                />
+              ) : (
+                <Image
+                  src={user}
+                  alt="Logo"
+                  className={s.logo}
+                  width={25}
+                  height={25}
+                />
+              )}
+            </a>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
