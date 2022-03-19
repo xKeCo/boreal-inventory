@@ -31,13 +31,13 @@ export default function SimpleBottomNavigation() {
       <div className={s.bottomNav}>
         {userData.role === "admin" && (
           <>
-            <Link href="/">
+            <Link href="/" passHref>
               <div className={s.bottomNav__iconContainer}>
                 <a>
                   {path === "/home" ? (
                     <Image
                       src={homeFilled}
-                      alt="Logo"
+                      alt="home"
                       className={s.logo}
                       width={25}
                       height={25}
@@ -45,7 +45,7 @@ export default function SimpleBottomNavigation() {
                   ) : (
                     <Image
                       src={home}
-                      alt="Logo"
+                      alt="home"
                       className={s.logo}
                       width={25}
                       height={25}
@@ -55,13 +55,13 @@ export default function SimpleBottomNavigation() {
               </div>
             </Link>
 
-            <Link href="/history">
+            <Link href="/history" passHref>
               <div className={s.bottomNav__iconContainer}>
                 <a>
                   {path === "/history" ? (
                     <Image
                       src={historyFilled}
-                      alt="Logo"
+                      alt="history"
                       className={s.logo}
                       width={25}
                       height={25}
@@ -69,7 +69,7 @@ export default function SimpleBottomNavigation() {
                   ) : (
                     <Image
                       src={history}
-                      alt="Logo"
+                      alt="history"
                       className={s.logo}
                       width={25}
                       height={25}
@@ -81,13 +81,13 @@ export default function SimpleBottomNavigation() {
           </>
         )}
 
-        <Link href="/add">
+        <Link href="/add" passHref>
           <div className={s.bottomNav__iconContainer}>
             <a>
               {path === "/add" ? (
                 <Image
                   src={addFilled}
-                  alt="Logo"
+                  alt="add"
                   className={s.logo}
                   width={25}
                   height={25}
@@ -95,7 +95,7 @@ export default function SimpleBottomNavigation() {
               ) : (
                 <Image
                   src={add}
-                  alt="Logo"
+                  alt="add"
                   className={s.logo}
                   width={25}
                   height={25}
@@ -104,13 +104,13 @@ export default function SimpleBottomNavigation() {
             </a>
           </div>
         </Link>
-        <Link href="/profile">
+        <Link href="/profile" passHref>
           <div className={s.bottomNav__iconContainer}>
             <a>
               {path === "/profile" ? (
                 <Image
                   src={userFilled}
-                  alt="Logo"
+                  alt="profile"
                   className={s.logo}
                   width={25}
                   height={25}
@@ -118,7 +118,7 @@ export default function SimpleBottomNavigation() {
               ) : (
                 <Image
                   src={user}
-                  alt="Logo"
+                  alt="pofile"
                   className={s.logo}
                   width={25}
                   height={25}
