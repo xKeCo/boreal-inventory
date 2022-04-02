@@ -8,18 +8,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.4.0",
-    "@nextui-org/react": "^1.0.2-beta.4",
-    "firebase": "^9.6.6",
-    "next": "^12.1.0",
-    "next-pwa": "^5.4.4",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "@nextui-org/react": "^1.0.6-beta.5",
+    "firebase": "^9.6.10",
+    "next": "^12.1.4",
+    "next-pwa": "^5.4.6",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-hot-toast": "^2.2.0",
-    "react-router-dom": "^6.2.1",
+    "react-router-dom": "^6.3.0",
     "react-select": "^5.2.2"
   },
   "devDependencies": {
