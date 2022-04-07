@@ -8,14 +8,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.8.2",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.3.1",
-    "@mui/material": "^5.4.0",
-    "@nextui-org/react": "^1.0.6-beta.5",
+    "@mui/icons-material": "^5.6.0",
+    "@mui/material": "^5.6.0",
+    "@nextui-org/react": "^1.0.7-beta.5",
     "firebase": "^9.6.10",
     "next": "^12.1.4",
-    "next-pwa": "^5.4.6",
+    "next-pwa": "^5.4.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hot-toast": "^2.2.0",
@@ -23,7 +23,7 @@
     "react-select": "^5.2.2"
   },
   "devDependencies": {
-    "eslint": "8.8.0",
-    "eslint-config-next": "12.0.9"
+    "eslint": "^8.12.0",
+    "eslint-config-next": "^12.1.4"
   }
 }
